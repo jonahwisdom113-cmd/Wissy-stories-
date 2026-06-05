@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StoryVerse</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora&family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="brand">StoryVerse</div>
+    <button onclick="showPage('home')">Library</button>
+    <button onclick="showPage('messages')">Messages</button>
+    <button id="adminBtn" onclick="promptAdmin()">🛡️ Admin</button>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div id="home" class="page active">
+    <h1>StoryVerse</h1>
+    <p class="sub">Your reading sanctuary</p>
+    <div id="storyList"></div>
+  </div>
+
+  <!-- READ PAGE -->
+  <div id="read" class="page">
+    <button onclick="showPage('home')" class="back">← Back</button>
+    <div id="storyContent"></div>
+    <div id="commentsSection"></div>
+  </div>
+
+  <!-- WRITE PAGE (Admin only) -->
+  <div id="write" class="page">
+    <h2>Write a Story</h2>
+    <label>Title</label>
+    <input id="newTitle" placeholder="Story title..." />
+    <label>Genre</label>
+    <select id="newGenre">
+      <option>Fantasy</option>
+      <option>Sci-Fi</option>
+      <option>Romance</option>
+      <option>Mystery</option>
+      <option>Historical</option>
+      <option>Thriller</option>
+    </select>
+    <label>Synopsis</label>
+    <textarea id="newSynopsis" placeholder="Short teaser..."></textarea>
+    <label>Story Content</label>
+    <textarea id="newContent" placeholder="Write your story here..." rows="10"></textarea>
+    <label>Cover Icon</label>
+    <div id="emojiPicker"></div>
+    <br/>
+    <button class="btn-gold" onclick="publishStory()">Publish Story ✨</button>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div id="admin" class="page">
+    <h2>Admin Panel</h2>
+    <div id="adminStats"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px">
+      <h3 style="margin:0">Manage Stories</h3>
+      <button class="btn-gold" onclick="showPage('write')">+ New Story</button>
+    </div>
+    <div id="adminList"></div>
+  </div>
+
+  <!-- MESSAGES PAGE -->
+  <div id="messages" class="page">
+    <h2>Messages</h2>
+    <div class="card">
+      <label>To:</label>
+      <input id="msgTo" placeholder="Username..." />
+      <label>Message:</label>
+      <textarea id="msgText" placeholder="Type here..." rows="3"></textarea>
+      <button class="btn-gold" onclick="sendMessage()">Send</button>
+    </div>
+    <h3>Inbox</h3>
+    <div id="inbox"></div>
+  </div>
+
+  <!-- PIN MODAL -->
+  <div id="pinModal" class="modal-bg" style="display:none">
+    <div class="modal">
+      <div style="font-size:40px;text-align:center">🛡️</div>
+      <h3 style="text-align:center">Admin Access</h3>
+      <p style="text-align:center;color:#888;font-size:13px">PIN hint: 1234</p>
+      <input id="pinInput" type="password" maxlength="4" placeholder="••••" style="text-align:center;letter-spacing:8px;font-size:24px"/>
+      <p id="pinError" style="color:red;text-align:center;display:none">Wrong PIN</p>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button onclick="closeModal()" style="flex:1">Cancel</button>
+        <button class="btn-gold" onclick="checkPin()" style="flex:1">Enter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
